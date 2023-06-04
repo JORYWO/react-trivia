@@ -1,0 +1,67 @@
+import { useState, useEffect } from "react"
+import axios from "axios"
+
+import Question from "../components/Question"
+import Spinner from "../components/Spinner"
+
+export default function TriviaPage(props){
+  const [isLoading, setIsLoading] = useState(true)
+  const [questions, setQuestions] = useState([])
+  const [score, setScore] = useState(0)
+  const [playingGame, setPlayingGame] = useState(true)
+  
+  const initaliseGame = () => {
+    setIsLoading(true)
+    setPlayingGame(true)
+    setScore(0)
+    getQuestions()
+  }
+
+  useEffect(() => {
+    initaliseGame()
+  },[])
+
+  const getQuestions = async () => {
+    const difficulty = props.settings.difficulty ? `difficulty=${props.settings.difficulty}` : ""
+    const category = props.settings.category ? `categories=${props.settings.category}&` : ""
+    const res = await axios.get(`https://the-trivia-api.com/api/questions?${category}limit=5&${difficulty}`)
+    setQuestions(res.data)
+    setIsLoading(false)
+  }
+  
+  const increaseScore = () =>{
+    setScore((prevScore) => prevScore + 1) 
+  }
+
+  const questionList = questions.map((question, index) => (
+    <Question
+      key={index}
+      question={question.question}
+      correctAns={question.correctAnswer}
+      wrongAns={question.incorrectAnswers}
+      increaseScore={increaseScore}
+      playingGame={playingGame}
+    />
+    ));
+
+  if (isLoading) {
+    return (<Spinner/>)
+  }
+
+  else {
+    return(
+      <>
+        {questionList}
+        {playingGame && <button className="game-button" onClick={() => setPlayingGame(false)}>Check Answers</button>}
+        {!playingGame && 
+        <div className="play-again-text">
+          <button className="game-button" onClick={props.changeGameState}>Go Back</button>
+          <h4 className="answer-text">You scored {score}/{questionList.length} correct answers</h4>
+          <button className="game-button" onClick={initaliseGame}>Play again</button>
+        </div>
+        }
+      </>
+
+    )
+  }
+}
