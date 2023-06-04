@@ -1,6 +1,9 @@
 import {useState, useEffect} from "react"
 
 export default function Question(props){
+    let green = "#94D7A2"
+    let lightBlue = "#d6dbf5" 
+    let lightRed = "#F8BCBC"
     const [answers, setAnswers] = useState([])
 
     useEffect(() => {
@@ -54,12 +57,12 @@ export default function Question(props){
     const buttonColour = (btn) => {
       let colour = "white"
       if (props.playingGame){
-        if (btn.isSelected) colour = "#d6dbf5"
+        if (btn.isSelected) colour = lightBlue
       } else{
-        if (btn.isSelected && btn.value === props.correctAns) colour = "#94D7A2"
+        if (btn.isSelected && btn.value === props.correctAns) colour = green
           else {
-            if (btn.isSelected) colour = "#F8BCBC"
-            else if (btn.value === props.correctAns) colour = "#94D7A2"
+            if (btn.isSelected) colour = lightRed
+            else if (btn.value === props.correctAns) colour = green
           }
         }
       return colour
