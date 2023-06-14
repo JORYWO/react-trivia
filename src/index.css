@@ -33,15 +33,15 @@ main {
 main::before{
   content:"";
   position: absolute;
-  height: 650px;
-  width: 650px;
+  height: 600px;
+  width: 600px;
   left: 500px;
   top: -150px;
   transform: rotate(-180deg);
   background: linear-gradient(#fffad1, #e91e63);
-  clip-path: circle(50% at 50% 30%);
+  clip-path: circle(40% at 50% 30%);
 
-  animation: transform 20s ease-in-out infinite both alternate,
+  animation: transform 18s ease-in-out infinite both alternate,
   movement_one 40s ease-in-out infinite both;
 }
 main::after{
@@ -53,9 +53,9 @@ main::after{
   bottom: -150px;
   transform: rotate(-180deg);
   background: linear-gradient(#0865c2, #7c97b3);
-  clip-path: circle(100% at 0% 120%);
+  clip-path: circle(100% at 0% 90%);
 
-  animation: transform 20s ease-in-out infinite both alternate,
+  animation: transform 18s ease-in-out infinite both alternate,
   movement_two 40s ease-in-out infinite both;
 }
 
@@ -84,7 +84,7 @@ main::after{
     transform: none;
   }
   50% {
-    transform: translate(15%, 15%) rotateY(10deg) scale(1.2);
+    transform: translate(15%, 15%) rotateY(40deg) scale(1.2);
   }
 }
 @keyframes movement_two {
