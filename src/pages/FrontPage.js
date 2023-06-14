@@ -1,56 +1,62 @@
-export default function FrontPage(props){
+import { useState } from "react"
+import FiveQuestions from "../components/FiveQuestionsForm"
+import TimedSelection from "../components/TimedSelection"
 
-  const handleChange = (event) => {
-    const {name, value} = event.target
-    props.setFormData(prevFormData => {
-      return {
-      ...prevFormData,
-      [name]: value
-      }
-    })
+export default function FrontPage(props){
+  const [selectedOption, setSelectedOption] = useState('');
+
+  const handleRadioChange = (event) => {
+    setSelectedOption(event.target.id);
+  };
+
+  let content = "";
+
+  if (selectedOption === 'one') {
+    content = <FiveQuestions changeGameState={props.changeGameState}/>;
+  } else if (selectedOption === 'two') {
+    content = <button type="submit" className="game-button" onClick={console.log("dsfjgh")}>Start Quiz</button>;
+  } else if (selectedOption === 'three') {
+    content = <TimedSelection />;
   }
 
   return (
-    <form className="frontpage-elements">
-      <h1 className="frontpage-title">Quizzical</h1>
-      <fieldset>
-        <label htmlFor="difficulty">Choose Difficulty - Leave blank for random difficulty</label>
-        <br />
-        <select 
-          id="difficulty"
-          value={props.formData.difficulty}
-          onChange={handleChange}
-          name="difficulty"
-        >
-          <option value=""></option>
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
-        </select>
-        <br />
-
-        <label htmlFor="category">Choose Categories - Leave blank for random category</label>
-        <br />
-        <select 
-          id="category"
-          value={props.formData.category}
-          onChange={handleChange}
-          name="category"
-        >
-          <option value=""></option>
-          <option value="general_knowledge">General Knowledge</option>
-          <option value="arts_and_literature">Arts & Literature</option>
-          <option value="film_and_tv">Film & TV</option>
-          <option value="food_and_drink">Food & Drink</option>
-          <option value="geography">Geography</option>
-          <option value="history">History</option>
-          <option value="music">Music</option>
-          <option value="science">Science</option>
-          <option value="society_and_culture">Society & Culture</option>
-          <option value="sport_and_leisure">Sport & Leisure</option>
-        </select>
-      </fieldset>
-      <button type="submit" className="game-button" onClick={props.changeGameState}>Start Quiz</button>   
-    </form>
+    <div className="center">
+      <div className="card">
+        <h1 className="frontpage-title">Quizzical</h1>
+        <div className="title">Select mode</div>
+        <div className="content">
+          <input
+            type="radio"
+            id="one"
+            checked={selectedOption === 'one'}
+            onChange={handleRadioChange}
+            />
+          <input
+            type="radio"
+            id="two"
+            checked={selectedOption === 'two'}
+            onChange={handleRadioChange}
+            />
+          <input
+            type="radio"
+            id="three"
+            checked={selectedOption === 'three'}
+            onChange={handleRadioChange}
+            />
+          <label htmlFor="one" className="box first">
+            <span className="yearly">5 Questions</span>
+          </label>
+          <label htmlFor="two" className="box second">
+            <span className="yearly">High Score</span>
+          </label>
+          <label htmlFor="three" className="box third">
+            <span className="yearly">Timed</span>
+          </label>
+        </div>
+      </div>
+      <div className="rendered-content">
+        {content}
+      </div>
+    </div>
   )
 }

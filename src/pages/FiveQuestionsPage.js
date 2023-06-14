@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import axios from "axios"
+import { FormDataContext } from '../App';
 
 import Question from "../components/Question"
 import Spinner from "../components/Spinner"
@@ -9,6 +10,7 @@ export default function TriviaPage(props){
   const [questions, setQuestions] = useState([])
   const [score, setScore] = useState(0)
   const [playingGame, setPlayingGame] = useState(true)
+  const {formData} = useContext(FormDataContext);
   
   const initaliseGame = () => {
     setIsLoading(true)
@@ -22,8 +24,8 @@ export default function TriviaPage(props){
   },[])
 
   const getQuestions = async () => {
-    const difficulty = props.settings.difficulty ? `difficulty=${props.settings.difficulty}` : ""
-    const category = props.settings.category ? `categories=${props.settings.category}&` : ""
+    const difficulty = formData.difficulty ? `difficulty=${formData.difficulty}` : ""
+    const category = formData.category ? `categories=${formData.category}&` : ""
     const res = await axios.get(`https://the-trivia-api.com/api/questions?${category}limit=5&${difficulty}`)
     setQuestions(res.data)
     setIsLoading(false)

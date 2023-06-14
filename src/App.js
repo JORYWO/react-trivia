@@ -1,17 +1,17 @@
-import { useState } from "react"
-
+import { createContext, useState } from 'react';
 import FrontPage from "./pages/FrontPage"
-import TriviaPage from "./pages/TriviaPage"
+import TriviaPage from "./pages/FiveQuestionsPage"
+
+export const FormDataContext = createContext();
 
 export default function App(){
   const initialSettings = {
-    difficulty: "",
-    category: "",
-  }
+    difficulty: '',
+    category: '',
+  };
 
+  const [formData, setFormData] = useState(initialSettings);
   const [startGame, setStartGame] = useState(false)
-  const [formData, setFormData] = useState(initialSettings)
-
 
   const changeGameState = (event) => {
     event.preventDefault()
@@ -19,19 +19,18 @@ export default function App(){
   }
 
   return (
+    <FormDataContext.Provider value={{ formData, setFormData }}>
     <main>
       {!startGame ? 
         <FrontPage 
-        changeGameState={changeGameState} 
-        formData={formData} 
-        setFormData={setFormData}
+          changeGameState={changeGameState} 
         /> 
       : 
         <TriviaPage 
-          settings={formData} 
           changeGameState={changeGameState}
         />
       }
     </main>
+    </FormDataContext.Provider>
   )
 }
