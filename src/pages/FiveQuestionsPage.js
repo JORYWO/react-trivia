@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import { useFormData } from '../Context/FormDataContext';
+import { useGameModeData } from '../Context/GameModeContext';
 
 import Question from "../components/Question"
 import Spinner from "../components/Spinner"
@@ -12,6 +13,7 @@ export default function TriviaPage(props){
   const [playingGame, setPlayingGame] = useState(true)
   
   const {formData} = useFormData();
+  const { changeGameMode } = useGameModeData()
   
   const initaliseGame = () => {
     setIsLoading(true)
@@ -58,9 +60,9 @@ export default function TriviaPage(props){
         {playingGame && <button className="game-button" onClick={() => setPlayingGame(false)}>Check Answers</button>}
         {!playingGame && 
         <div className="play-again-text">
-          <button className="game-button" onClick={props.changeGameState}>Go Back</button>
+          <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
           <h4 className="answer-text">You scored {score}/{questionList.length} correct answers</h4>
-          <button className="game-button" onClick={initaliseGame}>Play again</button>
+          <button className="game-button" onClick={() => initaliseGame()}>Play again</button>
         </div>
         }
       </>

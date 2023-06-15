@@ -1,13 +1,14 @@
 import { useFormData } from '../Context/FormDataContext';
+import { useGameModeData } from '../Context/GameModeContext';
 
-export default function ChooseTime() {
+export default function ChooseTime(props) {
   const {formData, handleChange} = useFormData();
-
+  const { changeGameMode } = useGameModeData()
 
   return (
     <form className="frontpage-elements">
     <fieldset>
-    <label htmlFor="category">Choose Time</label>
+    <label htmlFor="time">Choose Time</label>
     <br />
     <select 
         id="time"
@@ -23,7 +24,7 @@ export default function ChooseTime() {
       <option value="600">10 Minutes</option>
     </select>
     </fieldset>   
-    <button type="submit" className="game-button" onClick={console.log("dsfjgh")}>Start Quiz</button>
+    <button type="submit" className="game-button" onClick={() => changeGameMode(3)}>Start Quiz</button>
     </form>
   )
 }

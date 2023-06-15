@@ -1,9 +1,9 @@
 import { useFormData } from '../Context/FormDataContext';
-import QuizButton from './QuizButton';
+import { useGameModeData } from '../Context/GameModeContext';
 
 export default function FiveQuestions(props){
   const {formData, handleChange} = useFormData();
-
+  const { changeGameMode } = useGameModeData()
 
   return (
     <form className="frontpage-elements">
@@ -44,7 +44,7 @@ export default function FiveQuestions(props){
           <option value="sport_and_leisure">Sport & Leisure</option>
         </select>
       </fieldset>
-      <button type="submit" className="game-button" onClick={props.changeGameState}>Start Quiz</button>   
+      <button type="button" className="game-button" onClick={() => changeGameMode(1)}>Start Quiz</button>   
     </form>
   )
 }

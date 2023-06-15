@@ -1,9 +1,11 @@
 import { useState } from "react"
-import FiveQuestions from "../components/FiveQuestionsForm"
+import FiveQuestionsForm from "../components/FiveQuestionsForm"
 import TimedSelectionForm from "../components/TimedSelectionForm"
+import { useGameModeData } from '../Context/GameModeContext';
 
 export default function FrontPage(props){
   const [selectedOption, setSelectedOption] = useState('');
+  const { changeGameMode } = useGameModeData()
 
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.id);
@@ -12,9 +14,9 @@ export default function FrontPage(props){
   let content = "";
 
   if (selectedOption === 'one') {
-    content = <FiveQuestions changeGameState={props.changeGameState}/>;
+    content = <FiveQuestionsForm />;
   } else if (selectedOption === 'two') {
-    content = <button type="submit" className="game-button" onClick={() => console.log("dsfjgh")}>Start Quiz</button>;
+    content = <button type="submit" className="game-button" onClick={() => changeGameMode(2)}>Start Quiz</button>;
   } else if (selectedOption === 'three') {
     content = <TimedSelectionForm />;
   }

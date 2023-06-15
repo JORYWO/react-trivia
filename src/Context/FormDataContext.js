@@ -4,7 +4,7 @@ const DataContext = createContext();
 const initialSettings = {
   difficulty: '',
   category: '',
-  time: '',
+  time: '30', //default time is 30s
 };
 
 export function useFormData(){

@@ -1,29 +1,24 @@
 import { useState } from 'react';
 import { FormDataContext } from "./Context/FormDataContext"
-import FrontPage from "./pages/FrontPage"
-import FiveQuestionsPage from "./pages/FiveQuestionsPage"
+import { useGameModeData } from './Context/GameModeContext';
+import { FrontPage, FiveQuestionsPage, HighScorePage, TimedPage } from "./pages/exports"
 
 
 export default function App(){
-  const [startGame, setStartGame] = useState(false)
+  const {gameMode} = useGameModeData();
+  
+  const GameModeEnum = [
+    { label: 'FrontPage', value: 0, component: <FrontPage />},
+    { label: 'FiveQuestions', value: 1, component: <FiveQuestionsPage /> },
+    { label: 'HighScore', value: 2, component: <HighScorePage />},
+    { label: 'Timed', value: 3, component: <TimedPage />},
+  ];
 
-  const changeGameState = (event) => {
-    event.preventDefault()
-    setStartGame((prev) => !prev)
-  }
-
+  
   return (
     <FormDataContext>
     <main>
-      {!startGame ? 
-        <FrontPage 
-          changeGameState={changeGameState} 
-        /> 
-      : 
-        <FiveQuestionsPage 
-          changeGameState={changeGameState}
-        />
-      }
+      {GameModeEnum[gameMode].component}
     </main>
     </FormDataContext>
   )
