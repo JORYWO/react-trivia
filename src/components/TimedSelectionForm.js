@@ -1,14 +1,19 @@
+import { useFormData } from '../Context/FormDataContext';
+
 export default function ChooseTime() {
+  const {formData, handleChange} = useFormData();
+
+
   return (
     <form className="frontpage-elements">
     <fieldset>
     <label htmlFor="category">Choose Time</label>
     <br />
     <select 
-      id="time"
-      // value={formData.category}
-      // onChange={handleChange}
-      name="category"
+        id="time"
+        value={formData.time}
+        onChange={handleChange}
+        name="time"
       >
       <option value="30">30 Seconds</option>
       <option value="60">60 Seconds</option>

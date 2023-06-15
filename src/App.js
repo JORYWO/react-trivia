@@ -1,16 +1,10 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
+import { FormDataContext } from "./Context/FormDataContext"
 import FrontPage from "./pages/FrontPage"
-import TriviaPage from "./pages/FiveQuestionsPage"
+import FiveQuestionsPage from "./pages/FiveQuestionsPage"
 
-export const FormDataContext = createContext();
 
 export default function App(){
-  const initialSettings = {
-    difficulty: '',
-    category: '',
-  };
-
-  const [formData, setFormData] = useState(initialSettings);
   const [startGame, setStartGame] = useState(false)
 
   const changeGameState = (event) => {
@@ -19,18 +13,18 @@ export default function App(){
   }
 
   return (
-    <FormDataContext.Provider value={{ formData, setFormData }}>
+    <FormDataContext>
     <main>
       {!startGame ? 
         <FrontPage 
           changeGameState={changeGameState} 
         /> 
       : 
-        <TriviaPage 
+        <FiveQuestionsPage 
           changeGameState={changeGameState}
         />
       }
     </main>
-    </FormDataContext.Provider>
+    </FormDataContext>
   )
 }

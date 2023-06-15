@@ -1,6 +1,6 @@
 import { useState } from "react"
 import FiveQuestions from "../components/FiveQuestionsForm"
-import TimedSelection from "../components/TimedSelection"
+import TimedSelectionForm from "../components/TimedSelectionForm"
 
 export default function FrontPage(props){
   const [selectedOption, setSelectedOption] = useState('');
@@ -14,9 +14,9 @@ export default function FrontPage(props){
   if (selectedOption === 'one') {
     content = <FiveQuestions changeGameState={props.changeGameState}/>;
   } else if (selectedOption === 'two') {
-    content = <button type="submit" className="game-button" onClick={console.log("dsfjgh")}>Start Quiz</button>;
+    content = <button type="submit" className="game-button" onClick={() => console.log("dsfjgh")}>Start Quiz</button>;
   } else if (selectedOption === 'three') {
-    content = <TimedSelection />;
+    content = <TimedSelectionForm />;
   }
 
   return (

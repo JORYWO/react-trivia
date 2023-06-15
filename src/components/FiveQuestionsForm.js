@@ -1,19 +1,9 @@
-import { useContext } from 'react';
-import { FormDataContext } from '../App';
+import { useFormData } from '../Context/FormDataContext';
 import QuizButton from './QuizButton';
 
 export default function FiveQuestions(props){
-  const {formData, setFormData} = useContext(FormDataContext);
+  const {formData, handleChange} = useFormData();
 
-  const handleChange = (event) => {
-    const {name, value} = event.target
-    setFormData(prevFormData => {
-      return {
-      ...prevFormData,
-      [name]: value
-      }
-    })
-  }
 
   return (
     <form className="frontpage-elements">

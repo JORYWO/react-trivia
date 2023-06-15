@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
-import { FormDataContext } from '../App';
+import { useFormData } from '../Context/FormDataContext';
 
 import Question from "../components/Question"
 import Spinner from "../components/Spinner"
@@ -10,7 +10,8 @@ export default function TriviaPage(props){
   const [questions, setQuestions] = useState([])
   const [score, setScore] = useState(0)
   const [playingGame, setPlayingGame] = useState(true)
-  const {formData} = useContext(FormDataContext);
+  
+  const {formData} = useFormData();
   
   const initaliseGame = () => {
     setIsLoading(true)
