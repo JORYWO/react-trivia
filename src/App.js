@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FormDataContext } from "./Context/FormDataContext"
 import { useGameModeData } from './Context/GameModeContext';
 import { FrontPage, FiveQuestionsPage, HighScorePage, TimedPage } from "./pages/exports"

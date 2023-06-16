@@ -15,7 +15,7 @@ export default function TriviaPage(props){
   const {formData} = useFormData();
   const { changeGameMode } = useGameModeData()
   
-  const initaliseGame = () => {
+  const initialiseGame = () => {
     setIsLoading(true)
     setPlayingGame(true)
     setScore(0)
@@ -23,7 +23,7 @@ export default function TriviaPage(props){
   }
 
   useEffect(() => {
-    initaliseGame()
+    initialiseGame()
   },[])
 
   const getQuestions = async () => {
@@ -34,8 +34,10 @@ export default function TriviaPage(props){
     setIsLoading(false)
   }
   
-  const increaseScore = () =>{
-    setScore((prevScore) => prevScore + 1) 
+  const increaseScore = (isCorrect) =>{
+    if (isCorrect) {
+      setScore((prevScore) => prevScore + 1);
+    }
   }
 
   const questionList = questions.map((question, index) => (
@@ -62,7 +64,7 @@ export default function TriviaPage(props){
         <div className="play-again-text">
           <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
           <h4 className="answer-text">You scored {score}/{questionList.length} correct answers</h4>
-          <button className="game-button" onClick={() => initaliseGame()}>Play again</button>
+          <button className="game-button" onClick={() => initialiseGame()}>Play again</button>
         </div>
         }
       </>

@@ -282,3 +282,17 @@ fieldset select{
 .card input[type="radio"]{
   display: none;
 }
+
+/* High Score Page */
+.trivia__highScorePage-container{
+  z-index: 1;
+  margin-top: -20px;
+  margin-bottom: -10px;
+  /* border: 1px solid #000 */
+}
+.trivia__highScorePage-heading{
+  font-family: 'Karla', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--button-text-blue);
+}

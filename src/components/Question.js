@@ -45,15 +45,16 @@ export default function Question(props){
     }
   }
 
-  const checkAnswers = () =>{
-    if (!props.playingGame){
-      answers.forEach((btn) => {
-        if (btn.isSelected && btn.value === props.correctAns){
-          props.increaseScore()
-        }
-      })
+  const checkAnswers = () => {
+    if (!props.playingGame) {
+      const selectedAnswer = answers.find((btn) => btn.isSelected);
+      if (selectedAnswer && selectedAnswer.value === props.correctAns) {
+        props.increaseScore(true);
+      } else {
+        props.increaseScore(false);
+      }
     }
-  }
+  };
 
   const buttonColour = (btn) => {
     let colour = "white"
