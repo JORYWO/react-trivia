@@ -153,6 +153,8 @@ main::after{
 
 .play-again-text{
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .answer-text{
   letter-spacing: 1px;
@@ -295,4 +297,8 @@ fieldset select{
   font-size: 3rem;
   font-weight: 600;
   color: var(--button-text-blue);
+  margin-bottom: -10px;
+}
+.trivia__highScorePage-container h3{
+  /* margin-bottom: 0px; */
 }

@@ -3,18 +3,29 @@ import Question from "../components/Question";
 import Spinner from "../components/Spinner";
 import axios from "axios";
 
+import { useGameModeData } from '../Context/GameModeContext';
+
 export default function HighScorePage() {
-  const QUESTIONNUMBER = 1;
+  const QUESTIONNUMBER = 5;
   const [isLoading, setIsLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [playingGame, setPlayingGame] = useState(true);
   const [showLoserText, setShowLoserText] = useState(false);
 
+  const { changeGameMode } = useGameModeData()
+
   const initialiseGame = () => {
-    setPlayingGame(true);
     setIsLoading(true);
+    setPlayingGame(true);
     getQuestions();
+  };
+
+  const handlePlayAgain = (event) => {
+    event.preventDefault();
+    setShowLoserText(false);
+    setScore(0);
+    initialiseGame();
   };
 
   useEffect(() => {
@@ -54,7 +65,18 @@ export default function HighScorePage() {
   }
 
   if (showLoserText) {
-    return <h1>Loser</h1>;
+    return (
+      <>
+      <div>
+        <h1>You Lost!</h1>
+        <p>Your Score was: {score}</p>
+      </div>
+      <div>
+        <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
+        <button className="game-button" onClick={(event) => handlePlayAgain(event)}>Play again</button>
+      </div>
+      </>
+    );
   }
 
   return (
