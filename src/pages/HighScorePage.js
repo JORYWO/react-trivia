@@ -82,11 +82,11 @@ export default function HighScorePage() {
     <>
       {!showLoserText ? (
       <div className="trivia__highScorePage-container">
-        <h1 className="trivia__highScorePage-heading">Score: {score}</h1>
+        <h1>Score: {score}</h1>
         <h3>Answering any question wrong ends the game</h3>
       </div>
       ) : (
-      <div>
+      <div className="trivia__highScorePage-loserContainer">
         <h1>You Lost!</h1>
         <p>Your Score was: {score}</p>
       </div>

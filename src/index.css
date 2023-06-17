@@ -293,10 +293,27 @@ fieldset select{
   margin-top: -20px;
   margin-bottom: -10px;
 }
-.trivia__highScorePage-heading{
+.trivia__highScorePage-container h1{
   font-family: 'Karla', sans-serif;
   font-size: 3rem;
   font-weight: 600;
   color: var(--button-text-blue);
   margin-bottom: -10px;
+}
+
+.trivia__highScorePage-loserContainer{
+  z-index: 1;
+  margin-bottom: -10px;
+  text-align: center;
+}
+.trivia__highScorePage-loserContainer h1{
+  font-family: 'Karla', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--button-text-blue);
+  margin-bottom: -10px;
+}
+.trivia__highScorePage-loserContainer p{
+  font-family: 'Karla', sans-serif;
+  font-weight: 500;
 }
