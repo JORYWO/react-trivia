@@ -47,8 +47,28 @@ export default function HighScorePage() {
   const getQuestions = async () => {
     if (playingGame) {
       setIsLoading(true);
-      const res = await axios.get(`https://the-trivia-api.com/api/questions?limit=${QUESTIONNUMBER}&medium`)
-      setQuestions(res.data);
+      const probabilities = {easy: 0.6, medium: 0.30, hard: 0.10,};
+      const questions = [];
+
+      for (let i = 0; i < 5; i++) {
+        const randomValue = Math.random();
+        let difficulty;
+
+        if (randomValue < probabilities.easy) {
+          difficulty = 'easy';
+        } else if (randomValue < probabilities.easy + probabilities.medium) {
+          difficulty = 'medium';
+        } else {
+          difficulty = 'hard';
+        }
+
+        const res = await axios.get(
+          `https://the-trivia-api.com/api/questions?limit=1&difficulty=${difficulty}`
+        );
+        questions.push(res.data[0]);
+      }
+
+      setQuestions(questions);
       setIsLoading(false);
     }
   };
