@@ -98,7 +98,7 @@ export default function HighScorePage() {
           Check Answers
         </button>
       ) : (
-        <div>
+        <div className="play-again-text">
           <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
           <button className="game-button" onClick={() => handlePlayAgain()}>Play again</button>
         </div>

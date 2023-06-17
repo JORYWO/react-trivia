@@ -116,6 +116,7 @@ main::after{
 .answer-list{
   display: flex;
   justify-content: center;
+  gap: 60px;
 }
 
 .answer-element{
@@ -127,7 +128,6 @@ main::after{
   font-size: 0.9rem;
   text-align: center;
   font-family: 'Karla', sans-serif;
-  margin: 0 25px;
   overflow: hidden;
   transition: 0.5s;
 }
@@ -155,11 +155,13 @@ main::after{
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 110px;
+  z-index: 1;
 }
 .answer-text{
+  max-width: 140px;
   letter-spacing: 1px;
   z-index: 1;
-  padding: 0 50px;
 }
 
 .frontpage-elements{
@@ -290,7 +292,6 @@ fieldset select{
   z-index: 1;
   margin-top: -20px;
   margin-bottom: -10px;
-  /* border: 1px solid #000 */
 }
 .trivia__highScorePage-heading{
   font-family: 'Karla', sans-serif;
@@ -298,7 +299,4 @@ fieldset select{
   font-weight: 600;
   color: var(--button-text-blue);
   margin-bottom: -10px;
-}
-.trivia__highScorePage-container h3{
-  /* margin-bottom: 0px; */
 }
