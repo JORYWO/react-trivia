@@ -15,37 +15,51 @@ export default function HighScorePage() {
 
   const { changeGameMode } = useGameModeData()
 
-  const initialiseGame = () => {
-    setIsLoading(true);
-    setPlayingGame(true);
-    getQuestions();
-  };
 
-  const handlePlayAgain = (event) => {
-    event.preventDefault();
+  const resetGame = () => {
     setShowLoserText(false);
+    setPlayingGame(true);
+  };
+  
+  // User answers all questions right and resets questions
+  const initialiseGame = () => {
+    if (score === QUESTIONNUMBER) {
+      resetGame();
+    }
+  };
+  
+  // User Clicks Play Again Button
+  const handlePlayAgain = () => {
     setScore(0);
-    initialiseGame();
+    resetGame();
   };
 
   useEffect(() => {
     initialiseGame();
-  }, []);
+  }, [score]);
+
+  useEffect(() => {
+    if (playingGame){
+      getQuestions()
+    }
+  }, [playingGame])
 
   const getQuestions = async () => {
-    const res = await axios.get(`https://the-trivia-api.com/api/questions?limit=${QUESTIONNUMBER}`);
-    setQuestions(res.data);
-    setIsLoading(false);
+    if (playingGame) {
+      setIsLoading(true);
+      const res = await axios.get(`https://the-trivia-api.com/api/questions?limit=${QUESTIONNUMBER}&medium`)
+      setQuestions(res.data);
+      setIsLoading(false);
+    }
   };
 
   const increaseScore = (isCorrect) => {
-    console.log(isCorrect)
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
-      initialiseGame()
     }
     else {
       setShowLoserText(true);
+      setPlayingGame(false)
     }
   };
 
@@ -64,32 +78,30 @@ export default function HighScorePage() {
     return <Spinner />;
   }
 
-  if (showLoserText) {
-    return (
-      <>
-      <div>
-        <h1>You Lost!</h1>
-        <p>Your Score was: {score}</p>
-      </div>
-      <div>
-        <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
-        <button className="game-button" onClick={(event) => handlePlayAgain(event)}>Play again</button>
-      </div>
-      </>
-    );
-  }
-
   return (
     <>
+      {!showLoserText ? (
       <div className="trivia__highScorePage-container">
         <h1 className="trivia__highScorePage-heading">Score: {score}</h1>
         <h3>Answering any question wrong ends the game</h3>
       </div>
+      ) : (
+      <div>
+        <h1>You Lost!</h1>
+        <p>Your Score was: {score}</p>
+      </div>
+      )}
+
       {questionList}
-      {playingGame && (
+      {!showLoserText ? (
         <button className="game-button" onClick={() => setPlayingGame(false)}>
           Check Answers
         </button>
+      ) : (
+        <div>
+          <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
+          <button className="game-button" onClick={() => handlePlayAgain()}>Play again</button>
+        </div>
       )}
     </>
   );
