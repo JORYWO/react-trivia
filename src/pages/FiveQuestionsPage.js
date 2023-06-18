@@ -63,7 +63,7 @@ export default function TriviaPage(props){
         {!playingGame && 
         <div className="play-again-text">
           <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
-          <h4 className="answer-text">You scored {score}/{questionList.length} correct answers</h4>
+          <h4 className="fiveQuestionsPage-answerText">You scored {score}/{questionList.length} correct answers</h4>
           <button className="game-button" onClick={() => initialiseGame()}>Play again</button>
         </div>
         }

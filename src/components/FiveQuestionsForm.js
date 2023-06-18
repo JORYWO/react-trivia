@@ -6,7 +6,7 @@ export default function FiveQuestions(props){
   const { changeGameMode } = useGameModeData()
 
   return (
-    <form className="frontpage-elements">
+    <form className="form-elements">
       <fieldset>
         <label htmlFor="difficulty">Choose Difficulty - Leave blank for random difficulty</label>
         <br />

@@ -72,7 +72,7 @@ export default function Question(props){
 
   const buttonElements = answers.map(btn => (
     <button 
-      className="answer-element" 
+      className="question-answerElement" 
       key={btn.id} 
       style={{backgroundColor: buttonColour(btn)}}
       onClick={() => buttonSelection(btn.id)}
@@ -84,7 +84,7 @@ export default function Question(props){
   return (
     <div className="question">
       <h3>{props.question}</h3>
-      <div className="answer-list">
+      <div className="question-answerList">
         {buttonElements}
       </div>
       <hr></hr>

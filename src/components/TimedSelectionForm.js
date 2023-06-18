@@ -6,7 +6,7 @@ export default function ChooseTime(props) {
   const { changeGameMode } = useGameModeData()
 
   return (
-    <form className="frontpage-elements">
+    <form className="form-elements">
     <fieldset>
     <label htmlFor="time">Choose Time</label>
     <br />

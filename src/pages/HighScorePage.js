@@ -18,7 +18,7 @@ export default function HighScorePage() {
   useEffect(() => {
     const handleSessionStorage = () => {
       const highScore = sessionStorage.getItem("highScore");
-      if (score > highScore.toString()) {
+      if (score > highScore) {
         sessionStorage.setItem("highScore", score);
       }
     };
@@ -108,12 +108,12 @@ export default function HighScorePage() {
   return (
     <>
       {!showLoserText ? (
-      <div className="trivia__highScorePage-container">
+      <div className="highScorePage-container">
         <h1>Score: {score}</h1>
         <h3>Answering any question wrong ends the game</h3>
       </div>
       ) : (
-      <div className="trivia__highScorePage-loserContainer">
+      <div className="highScorePage-loserContainer">
         <h1>You Lost!</h1>
         <p>Your Score was: {score} and your high Score is: {sessionStorage.getItem("highScore")}</p>
       </div>

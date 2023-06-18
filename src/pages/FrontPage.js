@@ -22,11 +22,11 @@ export default function FrontPage(){
   }
 
   return (
-    <div className="center">
-      <div className="card">
+    <div className="frontpage-center-container">
+      <div className="frontpage-card">
         <h1 className="frontpage-title">Quizzical</h1>
-        <div className="title">Select mode</div>
-        <div className="content">
+        <h3>Select mode</h3>
+        <div>
           <input
             type="radio"
             id="one"
@@ -56,7 +56,7 @@ export default function FrontPage(){
           </label>
         </div>
       </div>
-      <div className="rendered-content">
+      <div>
         {content}
       </div>
     </div>

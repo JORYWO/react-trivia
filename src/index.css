@@ -1,3 +1,5 @@
+/* Main Section */
+
 * {
   box-sizing: border-box;
   --button-text-blue: #4D5B9E;
@@ -54,7 +56,7 @@ main::after{
   transform: rotate(-180deg);
   background: linear-gradient(#0865c2, #7c97b3);
   clip-path: circle(100% at 0% 90%);
-
+  
   animation: transform 18s ease-in-out infinite both alternate,
   movement_two 40s ease-in-out infinite both;
 }
@@ -97,43 +99,7 @@ main::after{
   }
 }
 
-.center{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.rendered-content{
-  margin-top: 50px;
-}
-
-.question{
-  width: 85%;
-  z-index: 1;
-}
-
-.answer-list{
-  display: flex;
-  justify-content: center;
-  gap: 60px;
-}
-
-.answer-element{
-  height: 4rem;
-  width: 9rem;
-  border: 1px solid var(--button-text-blue);
-  border-radius: 30px;
-  color: #000;
-  font-size: 0.9rem;
-  text-align: center;
-  font-family: 'Karla', sans-serif;
-  overflow: hidden;
-  transition: 0.5s;
-}
-.answer-element:hover{
-  overflow: visible;
-}
+/* Common Styles */
 
 .game-button{
   color: #fff;
@@ -158,19 +124,78 @@ main::after{
   gap: 110px;
   z-index: 1;
 }
-.answer-text{
-  max-width: 140px;
-  letter-spacing: 1px;
-  z-index: 1;
-}
 
-.frontpage-elements{
+.form-elements{
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 1;
 }
 
+/* Front Page */
+
+.frontpage-center-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* radio buttons */
+.frontpage-card{
+  width: 400px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 50px;
+  z-index: 1;
+}
+.frontpage-title{
+  font-family: 'Karla', sans-serif;
+  font-size: 4rem;
+  color: var(--button-text-blue);
+  z-index: 1;
+}
+.frontpage-card h3{
+  font-size: 22px;
+  font-weight: 500;
+  font-family: 'Karla', sans-serif;
+}
+.frontpage-card  label.box{
+  background: #ddd;
+  margin-top: 12px;
+  padding: 10px 12px;
+  display: flex;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.frontpage-card label.box span{
+  font-family: 'Karla', sans-serif;
+  font-weight: 600;
+}
+#one:checked ~ label.first,
+#two:checked ~ label.second,
+#three:checked ~ label.third{
+  border-color: #000;
+  background: var(--button-text-blue);
+}
+#one:checked ~ label.first  span,
+#two:checked ~ label.second span,
+#three:checked ~ label.third span{
+  color: #fff;
+}
+.frontpage-card  label.box:hover{
+  background: #d5bbf7;
+}
+.frontpage-card input[type="radio"]{
+  display: none;
+}
+
+/* FiveQuestionsForm & TimedSelectionForm */
 fieldset{
   max-width: 300px;
   padding: 20px;
@@ -197,8 +222,49 @@ fieldset select{
   font-size: 1rem;
 }
 
+/* FiveQuestionsPage */
+
+.fiveQuestionsPage-answerText{
+  max-width: 140px;
+  letter-spacing: 1px;
+  z-index: 1;
+}
+
+/* High Score Page */
+
+.highScorePage-container{
+  z-index: 1;
+  margin-top: -20px;
+  margin-bottom: -10px;
+}
+.highScorePage-container h1{
+  font-family: 'Karla', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--button-text-blue);
+  margin-bottom: -10px;
+}
+
+.highScorePage-loserContainer{
+  z-index: 1;
+  margin-bottom: -10px;
+  text-align: center;
+}
+.highScorePage-loserContainer h1{
+  font-family: 'Karla', sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--button-text-blue);
+  margin-bottom: -10px;
+}
+.highScorePage-loserContainer p{
+  font-family: 'Karla', sans-serif;
+  font-weight: 500;
+}
+
 /* Spinner Component*/
-.loadingSpinnerContainer {
+
+.spinner-Container {
   position: fixed;
   top: 0;
   right: 0;
@@ -209,9 +275,9 @@ fieldset select{
   display: flex;
   justify-content: center;
   align-items: center;
-  }
+}
   
-  .loadingSpinner {
+.spinner {
   margin-bottom: 100px;
   width: 128px;
   height: 128px;
@@ -219,7 +285,7 @@ fieldset select{
   border-color: #000 transparent #555 transparent;
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
-  }
+}
   
 @keyframes spin {
   0% {
@@ -229,91 +295,32 @@ fieldset select{
     transform: rotate(360deg);
   }
 }
-  
-/* radio buttons */
-.card{
-  width: 400px;
-  background: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+
+/* Question Component */
+
+.question{
+  width: 85%;
   z-index: 1;
 }
-.card .frontpage-title{
-  font-family: 'Karla', sans-serif;
-  font-size: 4rem;
-  color: var(--button-text-blue);
-  z-index: 1;
-}
-.card .title{
-  font-size: 22px;
-  font-weight: 500;
-  font-family: 'Karla', sans-serif;
-}
-.card .content{
-  margin-top: 20px;
-}
-.card  label.box{
-  background: #ddd;
-  margin-top: 12px;
-  padding: 10px 12px;
+
+.question-answerList{
   display: flex;
-  border-radius: 5px;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-.card label.box span{
-  font-family: 'Karla', sans-serif;
-  font-weight: 600;
-}
-#one:checked ~ label.first,
-#two:checked ~ label.second,
-#three:checked ~ label.third{
-  border-color: #000;
-  background: var(--button-text-blue);
-}
-#one:checked ~ label.first  span,
-#two:checked ~ label.second span,
-#three:checked ~ label.third span{
-  color: #fff;
-}
-.card  label.box:hover{
-  background: #d5bbf7;
+  justify-content: center;
+  gap: 60px;
 }
 
-.card input[type="radio"]{
-  display: none;
-}
-
-/* High Score Page */
-.trivia__highScorePage-container{
-  z-index: 1;
-  margin-top: -20px;
-  margin-bottom: -10px;
-}
-.trivia__highScorePage-container h1{
-  font-family: 'Karla', sans-serif;
-  font-size: 3rem;
-  font-weight: 600;
-  color: var(--button-text-blue);
-  margin-bottom: -10px;
-}
-
-.trivia__highScorePage-loserContainer{
-  z-index: 1;
-  margin-bottom: -10px;
+.question-answerElement{
+  height: 4rem;
+  width: 9rem;
+  border: 1px solid var(--button-text-blue);
+  border-radius: 30px;
+  color: #000;
+  font-size: 0.9rem;
   text-align: center;
-}
-.trivia__highScorePage-loserContainer h1{
   font-family: 'Karla', sans-serif;
-  font-size: 3rem;
-  font-weight: 600;
-  color: var(--button-text-blue);
-  margin-bottom: -10px;
+  overflow: hidden;
+  transition: 0.5s;
 }
-.trivia__highScorePage-loserContainer p{
-  font-family: 'Karla', sans-serif;
-  font-weight: 500;
+.question-answerElement:hover{
+  overflow: visible;
 }
