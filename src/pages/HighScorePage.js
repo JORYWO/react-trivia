@@ -14,7 +14,24 @@ export default function HighScorePage() {
   const [showLoserText, setShowLoserText] = useState(false);
 
   const { changeGameMode } = useGameModeData()
+  
+  useEffect(() => {
+    const handleSessionStorage = () => {
+      const highScore = sessionStorage.getItem("highScore");
+      if (score > highScore.toString()) {
+        sessionStorage.setItem("highScore", score);
+      }
+    };
 
+    initialiseGame();
+    handleSessionStorage()
+  }, [score]);
+
+  useEffect(() => {
+    if (playingGame){
+      getQuestions()
+    }
+  }, [playingGame])
 
   const resetGame = () => {
     setShowLoserText(false);
@@ -33,16 +50,6 @@ export default function HighScorePage() {
     setScore(0);
     resetGame();
   };
-
-  useEffect(() => {
-    initialiseGame();
-  }, [score]);
-
-  useEffect(() => {
-    if (playingGame){
-      getQuestions()
-    }
-  }, [playingGame])
 
   const getQuestions = async () => {
     if (playingGame) {
@@ -108,7 +115,7 @@ export default function HighScorePage() {
       ) : (
       <div className="trivia__highScorePage-loserContainer">
         <h1>You Lost!</h1>
-        <p>Your Score was: {score}</p>
+        <p>Your Score was: {score} and your high Score is: {sessionStorage.getItem("highScore")}</p>
       </div>
       )}
 
