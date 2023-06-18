@@ -7,13 +7,14 @@ import Question from "../components/Question"
 import Spinner from "../components/Spinner"
 
 export default function TriviaPage(props){
+  const {formData} = useFormData();
+  const { changeGameMode } = useGameModeData()
+  
   const [isLoading, setIsLoading] = useState(true)
   const [questions, setQuestions] = useState([])
   const [score, setScore] = useState(0)
   const [playingGame, setPlayingGame] = useState(true)
   
-  const {formData} = useFormData();
-  const { changeGameMode } = useGameModeData()
   
   const initialiseGame = () => {
     setIsLoading(true)

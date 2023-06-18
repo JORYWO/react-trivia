@@ -4,8 +4,8 @@ import TimedSelectionForm from "../components/TimedSelectionForm"
 import { useGameModeData } from '../Context/GameModeContext';
 
 export default function FrontPage(){
-  const [selectedOption, setSelectedOption] = useState('');
   const { changeGameMode } = useGameModeData()
+  const [selectedOption, setSelectedOption] = useState('');
 
   const handleRadioChange = (event) => {
     setSelectedOption(event.target.id);

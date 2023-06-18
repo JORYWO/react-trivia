@@ -6,6 +6,8 @@ import axios from "axios";
 import { useGameModeData } from '../Context/GameModeContext';
 
 export default function HighScorePage() {
+  const { changeGameMode } = useGameModeData()
+  
   const QUESTIONNUMBER = 5;
   const [isLoading, setIsLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
@@ -13,7 +15,6 @@ export default function HighScorePage() {
   const [playingGame, setPlayingGame] = useState(true);
   const [showLoserText, setShowLoserText] = useState(false);
 
-  const { changeGameMode } = useGameModeData()
   
   useEffect(() => {
     const handleSessionStorage = () => {
@@ -84,6 +85,7 @@ export default function HighScorePage() {
     if (isCorrect) {
       setScore((prevScore) => prevScore + 1);
     }
+    //user gets only 1 question wrong, game ends
     else {
       setShowLoserText(true);
       setPlayingGame(false)
