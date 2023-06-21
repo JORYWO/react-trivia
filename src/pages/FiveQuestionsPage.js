@@ -50,7 +50,7 @@ export default function TriviaPage(props){
       increaseScore={increaseScore}
       playingGame={playingGame}
     />
-    ));
+  ));
 
   if (isLoading) {
     return (<Spinner/>)
