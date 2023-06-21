@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Question from "../components/Question";
 import Spinner from "../components/Spinner";
-import axios from "axios";
+import { fetchRandQuestions } from "./exports";
 
 import { useGameModeData } from '../Context/GameModeContext';
 
@@ -55,28 +55,9 @@ export default function HighScorePage() {
   const getQuestions = async () => {
     if (playingGame) {
       setIsLoading(true);
-      const probabilities = {easy: 0.6, medium: 0.30, hard: 0.10,};
-      const questions = [];
 
-      for (let i = 0; i < 5; i++) {
-        const randomValue = Math.random();
-        let difficulty;
-
-        if (randomValue < probabilities.easy) {
-          difficulty = 'easy';
-        } else if (randomValue < probabilities.easy + probabilities.medium) {
-          difficulty = 'medium';
-        } else {
-          difficulty = 'hard';
-        }
-
-        const res = await axios.get(
-          `https://the-trivia-api.com/api/questions?limit=1&difficulty=${difficulty}`
-        );
-        questions.push(res.data[0]);
-      }
-
-      setQuestions(questions);
+      const fetchQuestions = await fetchRandQuestions()
+      setQuestions(fetchQuestions);
       setIsLoading(false);
     }
   };
@@ -98,7 +79,7 @@ export default function HighScorePage() {
       question={question.question}
       correctAns={question.correctAnswer}
       wrongAns={question.incorrectAnswers}
-      increaseScore={isCorrect => increaseScore(isCorrect)}
+      increaseScore={increaseScore}
       playingGame={playingGame}
     />
   ));
