@@ -262,6 +262,27 @@ fieldset select{
   font-weight: 500;
 }
 
+/* Timed Page */
+.timedPage-heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 500px;
+  font-size: 22px;
+  font-weight: 700;
+  z-index: 1;
+}
+.timedPage-heading :first-child{
+  color: var(--button-text-blue);
+  text-decoration: underline;
+}
+
+.timedPage-finishedText{
+  text-align: center;
+  font-weight: 600;
+  font-size: 22px;
+}
+
 /* Spinner Component*/
 
 .spinner-Container {
