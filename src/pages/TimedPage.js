@@ -10,8 +10,12 @@ export default function TimedPage(){
   const {formData} = useFormData();
   const { changeGameMode } = useGameModeData()
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true);
+  const [questions, setQuestions] = useState([]);
+  const [score, setScore] = useState(0);
+  const [playingGame, setPlayingGame] = useState(true);
   const [timer, setTimer] = useState(formData.time)
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,6 +26,67 @@ export default function TimedPage(){
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    initialiseGame()
+  }, [score])
+
+
+  const initialiseGame = () => {
+    setIsLoading(true)
+    setPlayingGame(true)
+    getQuestions()
+  }
+
+  const getQuestions = async () => {
+    if (playingGame) {
+      setIsLoading(true);
+      const probabilities = {easy: 0.6, medium: 0.30, hard: 0.10,};
+      const questions = [];
+
+      for (let i = 0; i < 5; i++) {
+        const randomValue = Math.random();
+        let difficulty;
+
+        if (randomValue < probabilities.easy) {
+          difficulty = 'easy';
+        } else if (randomValue < probabilities.easy + probabilities.medium) {
+          difficulty = 'medium';
+        } else {
+          difficulty = 'hard';
+        }
+
+        const res = await axios.get(
+          `https://the-trivia-api.com/api/questions?limit=1&difficulty=${difficulty}`
+        );
+        questions.push(res.data[0]);
+      }
+
+      setQuestions(questions);
+      setIsLoading(false);
+    }
+  };
+
+  const increaseScore = (isCorrect) => {
+    if (isCorrect) {
+      setScore((prevScore) => {
+        const updatedScore = prevScore + 1;
+        initialiseGame(); // Call initialiseGame after updating the score
+        return updatedScore;
+      });
+    }
+  };
+
+  const questionList = questions.map((question, index) => (
+    <Question
+      key={index}
+      question={question.question}
+      correctAns={question.correctAnswer}
+      wrongAns={question.incorrectAnswers}
+      increaseScore={increaseScore}
+      playingGame={playingGame}
+    />
+  ));
 
   const formatTime = () => {
     const minutes = Math.floor(timer / 60);
@@ -42,12 +107,27 @@ export default function TimedPage(){
   }
 
   return (
-    <div>
+    <>
       {timer > 0 ? (
-        <p>{formatTime()}</p>
+      <>
+        <div className="timedPage-heading">
+          <p>Score: {score}</p>
+          {formatTime()}
+        </div>
+          {questionList}
+          <button className="game-button" onClick={() => {
+            setPlayingGame(false)
+          }}>
+          Check Answers
+          </button>
+      </>
       ) : (
-        <p>Countdown done</p>
+        <div className="timedPage-finishedText">
+          <p>{formData.time} Seconds Completed</p>
+          <p>Your Score was: {score}</p>
+          <h2></h2>
+        </div>
       )}
-    </div>
+    </>
   );
 }
