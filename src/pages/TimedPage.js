@@ -18,14 +18,19 @@ export default function TimedPage(){
 
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer((prevTime) => prevTime - 1);
-    }, 1000);
+    let interval = null;
 
+    // countdown only updates when not loading
+    if (!isLoading) {
+      interval = setInterval(() => {
+        setTimer((prevTime) => prevTime - 1);
+      }, 1000);
+    }
+  
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [isLoading]);
 
   useEffect(() => {
     initialiseGame()
