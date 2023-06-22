@@ -283,6 +283,10 @@ fieldset select{
   font-size: 22px;
 }
 
+.timedPage-finishedText p{
+  margin-bottom: 120px;
+}
+
 /* Spinner Component*/
 
 .spinner-Container {
