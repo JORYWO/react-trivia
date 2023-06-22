@@ -16,6 +16,7 @@ export default function TimedPage(){
   const [playingGame, setPlayingGame] = useState(true);
   const [timer, setTimer] = useState(formData.time);
   const [questionKey, setQuestionKey] = useState(0); // New state for remounting Question component
+  const [numOfQuestions, setNumOfQuestions] = useState(0); 
 
   useEffect(() => {
     let interval = null;
@@ -38,6 +39,7 @@ export default function TimedPage(){
 
   const resetGame = () => {
     setTimer(formData.time);
+    setNumOfQuestions(0)
     if (score === 0){
       initialiseGame();
     } else{
@@ -57,6 +59,7 @@ export default function TimedPage(){
 
       const fetchQuestions = await fetchRandQuestions();
       setQuestions(fetchQuestions);
+      setNumOfQuestions((prevCount) => prevCount + fetchQuestions.length)
       setIsLoading(false);
     }
   };
@@ -116,8 +119,8 @@ export default function TimedPage(){
         </>
       ) : (
         <div className="timedPage-finishedText">
-          <p>{formatTime(formData.time)} Completed</p>
-          <p>Your Score was: {score}</p>
+          <h1>{formatTime(formData.time)} Completed</h1>
+          <p>Your Score was: {score}<br />Out of {numOfQuestions} Questions</p>
           <div className="play-again-text">
             <button className="game-button" onClick={() => changeGameMode(0)}>
               Go Back
