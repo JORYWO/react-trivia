@@ -82,15 +82,15 @@ export default function TimedPage(){
     />
   ));
 
-  const formatTime = () => {
-    const minutes = Math.floor(timer / 60);
-    const seconds = timer % 60;
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
     let formattedTime = "";
     if (minutes > 0) {
-      formattedTime += `${minutes} minute${minutes === 1 ? "" : "s"}`;
+      formattedTime += `${minutes} Minute${minutes === 1 ? "" : "s"}`;
     }
     if (seconds > 0) {
-      formattedTime += `${minutes > 0 ? " and " : ""}${seconds} second${seconds === 1 ? "" : "s"}`;
+      formattedTime += `${minutes > 0 ? " and " : ""}${seconds} Second${seconds === 1 ? "" : "s"}`;
     }
     return formattedTime;
   };
@@ -105,7 +105,7 @@ export default function TimedPage(){
         <>
           <div className="timedPage-heading">
             <p>Score: {score}</p>
-            {formatTime()}
+            {formatTime(timer)}
           </div>
           {questionList}
           <button className="game-button"
@@ -116,7 +116,7 @@ export default function TimedPage(){
         </>
       ) : (
         <div className="timedPage-finishedText">
-          <p>{formData.time} Seconds Completed</p>
+          <p>{formatTime(formData.time)} Completed</p>
           <p>Your Score was: {score}</p>
           <div className="play-again-text">
             <button className="game-button" onClick={() => changeGameMode(0)}>
