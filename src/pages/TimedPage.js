@@ -34,11 +34,10 @@ export default function TimedPage(){
 
   useEffect(() => {
     initialiseGame()
-  }, [score])
+  }, [score, playingGame])
 
 
   const initialiseGame = () => {
-    setIsLoading(true)
     setPlayingGame(true)
     getQuestions()
   }
@@ -111,7 +110,14 @@ export default function TimedPage(){
         <div className="timedPage-finishedText">
           <p>{formData.time} Seconds Completed</p>
           <p>Your Score was: {score}</p>
-          <h2></h2>
+          <div className="play-again-text">
+            <button className="game-button" onClick={() => changeGameMode(0)}>Go Back</button>
+            <button className="game-button" onClick={() => {
+              setScore(0)
+              setTimer(formData.time)
+              setPlayingGame(true)
+            }}>Play again</button>
+          </div>
         </div>
       )}
     </>
