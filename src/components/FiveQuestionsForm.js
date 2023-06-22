@@ -1,7 +1,7 @@
 import { useFormData } from '../Context/FormDataContext';
 import { useGameModeData } from '../Context/GameModeContext';
 
-export default function FiveQuestions(props){
+export default function FiveQuestions(){
   const {formData, handleChange} = useFormData();
   const { changeGameMode } = useGameModeData()
 

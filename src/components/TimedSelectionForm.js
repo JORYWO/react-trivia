@@ -1,7 +1,7 @@
 import { useFormData } from '../Context/FormDataContext';
 import { useGameModeData } from '../Context/GameModeContext';
 
-export default function ChooseTime(props) {
+export default function ChooseTime() {
   const {formData, handleChange} = useFormData();
   const { changeGameMode } = useGameModeData()
 

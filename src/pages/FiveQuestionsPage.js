@@ -6,7 +6,7 @@ import { useGameModeData } from '../Context/GameModeContext';
 import Question from "../components/Question"
 import Spinner from "../components/Spinner"
 
-export default function TriviaPage(props){
+export default function FiveQuestionsPage(){
   const {formData} = useFormData();
   const { changeGameMode } = useGameModeData()
   
